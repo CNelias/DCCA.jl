@@ -1,4 +1,3 @@
-module calculs
 using Polynomials
 
 function log_space(start::Int,stop::Int,num::Int)
@@ -84,8 +83,4 @@ function dcca(x,y, box_start::Int, box_stop::Int, nb_pts::Int; fit_type = "polyn
         append!(rho_DCCA,ffi/(sqrt(ff1i)*sqrt(ff2i)))
     end
     return rho_DCCA
-end
-
-export dcca
-
 end
