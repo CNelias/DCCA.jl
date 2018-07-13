@@ -1,4 +1,4 @@
-module DCCA
+module calculs
 using Polynomials
 
 function log_space(start::Int,stop::Int,num::Int)
