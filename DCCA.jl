@@ -1,43 +1,35 @@
-using PyPlot 
+module DCCA
 using Polynomials
 
-# attention à la fonction reshape(), elle remplie en premier la dimension i (de (i,j)), sans considerations logiques
-
-function partitioning(x,box_size;backward = false) 
-    if backward == false
-        data_forward = copy(x)
-        for i in 1:length(x) 
-            if length(data_forward) % box_size != 0
-                deleteat!(data_forward,length(data_forward))
-            elseif isa(length(data_forward)/box_size,Int)
-                break
-            end
+function log_space(start::Int,stop::Int,num::Int)
+    tmp = map(x -> round(Int,x), logspace(log10(start),log10(stop),num))
+    spacing = Int64[]
+    push!(spacing,tmp[1])
+    deleteat!(tmp,1)
+    for i in tmp
+        if i != spacing[end]
+            append!(spacing,i)
+        elseif i == spacing[end]
+            append!(spacing,i+1)
         end
-        processed_data = copy(data_forward)
-        return reshape(processed_data,(box_size,Int(length(processed_data)/box_size)))  
-    elseif backward == true
-        data_forward = copy(x)
-        data_backward = copy(x)
-            for i in 1:length(x) 
-                if length(data_forward) % box_size != 0
-                    deleteat!(data_forward,length(data_forward))
-                elseif isa(length(data_forward)/box_size,Int)
-                    break
-                end
-            end
-        for i in 1:length(x)
-            if length(data_backward) % box_size != 0
-                deleteat!(data_backward,1)
-            elseif isa(length(data_backward)/box_size,Int)
-                break
-            end
-        end  
-        processed_data = vcat(data_forward,data_backward)
-        return reshape(processed_data,(Int(length(processed_data)/box_size),box_size))  
     end
+    return spacing
+end
+    
+function partitioning(x,box_size) 
+    data = copy(x)
+    partitionned_data = Vector{Vector{Float64}}()
+    @inbounds for i in 1:(length(x)-(box_size-1))
+        tmp = Vector{Float64}()
+        @inbounds for j in 0:(box_size-1)
+            append!(tmp,data[i+j])
+        end
+        push!(partitionned_data,tmp)
+    end
+    return hcat(partitionned_data...)'
 end
 
-function detrending(values; reg_type = "linear", order = 3)
+function detrending(values; reg_type = "linear", order = 1)
     position = collect(1:length(values))
     if reg_type == "polynomial"
     fit = polyfit(position,values,order)
@@ -49,25 +41,51 @@ function detrending(values; reg_type = "linear", order = 3)
 end
 
 function integrate(x)
-    integrated_x = Float64[]
-    sumx = 0
-    for i in x
-        sumx += i
-        append!(integrated_x,sumx)
-    end
-    return integrated_x 
+    return cumsum(x)
 end
 
-function fluctuation_function(x,y; fit_type = "linear", box_start = 5, box_stop = 80, backwards = false)
+function fluctuation_function(x,y, box_start::Int, box_stop::Int, nb_pts::Int; fit_type = "polynomial")
+    if mod(box_start,10) !=0 || mod(box_stop,10) !=0
+        print("ERROR : sizes of windows must be multiple of 10")     
+    end
     ff = Float64[]
-    for i in  box_start:box_stop
+    ffi = Float64[]
+    @inbounds for i in log_space(box_start,box_stop,nb_pts)
         ffi = 0
-        xi = partitioning(integrate(x),i)#; backward = backwards)
-        yi = partitioning(integrate(y),i)#; backward = backwards)
-        for j in 1:length(xi[1,:])
-            ffi += (1/length(xi[1,:]))*((1/i)*detrending(xi[:,j]; reg_type = fit_type)'detrending(yi[:,j]; reg_type = fit_type))
+        xi = partitioning(integrate(x),i)
+        yi = partitioning(integrate(y),i)
+        n = length(@view xi[:,1])
+        @inbounds for j in 1:n
+            ffi += ((1/i)*detrending(xi[j,:]; reg_type = fit_type)'detrending(yi[j,:]; reg_type = fit_type))
         end
-        append!(ff,sqrt(abs(ffi)))
+        append!(ff,1/n*sqrt(abs(ffi)))
     end
     return ff
+end
+
+function dcca(x,y, box_start::Int, box_stop::Int, nb_pts::Int; fit_type = "polynomial")
+    if mod(box_start,10)  !=0 || mod(box_stop,10) != 0
+        print("ERROR : sizes of windows must be multiple of 10")     
+    end
+    rho_DCCA = Float64[]
+    ffi = Float64[]
+    @inbounds for i in log_space(box_start,box_stop,nb_pts)
+        ffi = 0
+        ff1i = 0
+        ff2i = 0
+        xi = partitioning(integrate(x),i)
+        yi = partitioning(integrate(y),i)
+        n = length(@view xi[:,1])
+        @inbounds for j in 1:n
+            ffi += (1/n)*((1/i)*detrending(xi[j,:]; reg_type = fit_type)'detrending(yi[j,:]; reg_type = fit_type))
+            ff1i += (1/n)*((1/i)*detrending(xi[j,:]; reg_type = fit_type)'detrending(xi[j,:]; reg_type = fit_type))
+            ff2i += (1/n)*((1/i)*detrending(yi[j,:]; reg_type = fit_type)'detrending(yi[j,:]; reg_type = fit_type))  
+        end
+        append!(rho_DCCA,ffi/(sqrt(ff1i)*sqrt(ff2i)))
+    end
+    return rho_DCCA
+end
+
+export dcca
+
 end
