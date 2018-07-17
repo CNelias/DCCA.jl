@@ -3,7 +3,7 @@ module DCCA
 using PyPlot
 include("calculs.jl")
 
-function rho_DCCA(data1,data2,box_b::Int,box_s::Int,nb_pt::Int,plot::Bool)
+function rhoDCCA(data1,data2,box_b::Int,box_s::Int,nb_pt::Int,plot::Bool)
     x = log_space(box_b,box_s,nb_pt)
     y = dcca(data1,data2,box_b,box_s,nb_pt; fit_type = "polynomial")
     if plot == false
@@ -18,6 +18,6 @@ function rho_DCCA(data1,data2,box_b::Int,box_s::Int,nb_pt::Int,plot::Bool)
     end
 end
 
-export rho_DCCA
+export rhoDCCA
 
 end
