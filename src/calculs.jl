@@ -1,4 +1,5 @@
 using Polynomials
+export dcca
 
 function log_space(start::Int,stop::Int,num::Int)
     tmp = map(x -> round(Int,x), logspace(log10(start),log10(stop),num))
