@@ -9,10 +9,10 @@ function rhoDCCA(data1,data2,box_b::Int,box_s::Int,nb_pt::Int,plot::Bool)
     if plot == false
         return y
     elseif plot == true
-        plot(x,y,"bo-",markersize = 4)
+        plot(x,y,"bo-",markersize = 4, label = "strengh of correlation")
         title("DCCA coefficients analysis of data")
         legend()
-        xlabel("Window size s (notes)")
+        xlabel("Window size s")
         xscale("log")
         ylabel(L"$\rho_{DCCA}(s)$")
     end
