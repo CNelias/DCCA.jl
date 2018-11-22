@@ -29,7 +29,7 @@ calling the DCCA function with random white noise
 
 ```julia
 julia> x1 = rand(1000); x2 = rand(1000)
-x,y = DFA(x,x,20,200,30,true)
+x,y = DFA(x,x,20,200,30)
 ```
 Gave the following plot :
 
