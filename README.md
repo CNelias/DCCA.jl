@@ -1,4 +1,4 @@
-Detrended Cross-Correlation Coefficients analysis
+Detrended Cross-Correlation Analysis
 =================================================
 
 A module to perform DCCA coefficients analysis. The coefficient rho symbolizes the strengh of the correlation between the 2 time series, it's value lies in [-1,1], a positive value indicates correlations, a negative value show anti-correlations and a value of 0 means no correlations.
