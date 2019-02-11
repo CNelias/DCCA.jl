@@ -1,6 +1,5 @@
 module DCCA
 
-using PyPlot
 include("calculs.jl")
 
 function rhoDCCA(data1,data2,box_b::Int,box_s::Int,nb_pt::Int)
