@@ -2,8 +2,8 @@ using Polynomials
 export dcca, log_space
 
 function log_space(start::Int,stop::Int,num::Int)
-    tmp = map(x -> round(Int,x), logspace(log10(start),log10(stop),num))
-    spacing = Int64[]
+    tmp = map(x -> round(Int,x), exp10.(range(log10(start), stop=log10(stop), length=num)))
+    spacing = Int[]
     push!(spacing,tmp[1])
     deleteat!(tmp,1)
     for i in tmp
