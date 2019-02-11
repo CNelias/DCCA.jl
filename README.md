@@ -55,3 +55,9 @@ Requirements
 ------------
 
 * Polynomials
+
+
+TO DO :
+------------
+- Tidy up the code, optimize it and rename the variables.
+
