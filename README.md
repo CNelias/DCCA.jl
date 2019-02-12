@@ -1,6 +1,6 @@
  **Travis**     
 :--------:
-[![Build Status](https://travis-ci.com/johncwok/DCCA.svg?branch=master)](https://travis-ci.com/johncwok/DCCA)
+[![Build Status](https://travis-ci.com/johncwok/DCCA.jl.svg?branch=master)](https://travis-ci.com/johncwok/DCCA.jl)
 
 Detrended Cross-Correlation Analysis
 =================================================
