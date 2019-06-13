@@ -25,6 +25,9 @@ Call the rhoDCCA function rhoDCCA(data1,data1,box_b::Int,box_s::Int,nb_pt::Int).
 
 the arguments have the following meaning :
 * data1, data2 : the first  and second time series of data to analyse
+```diff
+- The input data have to be a 1D array.
+```
 * box_b, box_s : the starting and ending point of the analysis. It's recommended for box_s not to be to big in comparison to 
 the total length of the time-series, otherwise you'll get artefacts. Stopping at a box_s roughly equal to 1/4 of the total length 
 is a good idea.
@@ -33,6 +36,7 @@ is a good idea.
 the function returns :
 * the list of points where the analysis was carried out
 * the value of the DCCA coefficient at each of these points
+
 
 ### Example of DCCA coefficient calculation :
 
