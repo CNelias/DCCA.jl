@@ -12,6 +12,13 @@ The implementation is based, among others, on this article:
 Zebende G, Da Silva M MacHado, Filho A. *DCCA cross-correlation coefficient differentiation: Theoretical and practical approaches* Physica A: Statistical Mechanics and its Applications
 (2013)
 
+### Installation :
+
+Copy the link provided by github above and use the clone command :
+```Julia
+Pkg.clone("https://github.com/johncwok/DCCA.jl.git")
+```
+
 ### Perform a DCCA coefficient computation :
 
 Call the rhoDCCA function rhoDCCA(data1,data1,box_b::Int,box_s::Int,nb_pt::Int).
