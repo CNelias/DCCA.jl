@@ -59,7 +59,11 @@ ylabel(L"$\rho_{DCCA}(s)$")
 
 ![index](https://user-images.githubusercontent.com/34754896/42820668-f9ff05ca-89d6-11e8-9208-73d33aa3c137.png)
 
-As noted previously, the value here lies in [-0.1,0.1] although it should be 0 all the time since we took here 2 series of white uncorrelated noise. It is therefore important to not give to much importance to anything lying in this interval. 
+As noted previously, the value here lies in [-0.1,0.1] although we took here 2 series of white uncorrelated noise. It is therefore important to ask yourself if your result is statistacally relevant. Here is a visual representation to show what I mean.
+
+The confidence interval was estimated by simulation and is therefore not an analytical result : even if you find a value of 0.3, you should do the experiment again to be sure that you actually found correlation and not statistical fluctuations. 
+
+![DCCA_significance_test](https://user-images.githubusercontent.com/34754896/59430685-3783fc00-8de3-11e9-9390-b688df35e5fe.PNG)
 
 
 Requirements
