@@ -63,8 +63,8 @@ As noted previously, the value here lies in [-0.1,0.1] although we took here 2 s
 
 The confidence interval was estimated by simulation and is therefore not an analytical result : even if you find a value of 0.3, you should do the experiment again to be sure that you actually found correlation and not statistical fluctuations. 
 
-![DCCA_significance_test](https://user-images.githubusercontent.com/34754896/59430685-3783fc00-8de3-11e9-9390-b688df35e5fe.PNG)
 
+<img src="https://user-images.githubusercontent.com/34754896/59430685-3783fc00-8de3-11e9-9390-b688df35e5fe.PNG" width="600" height="400">
 
 Requirements
 ------------
