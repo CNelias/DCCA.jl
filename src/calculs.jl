@@ -36,25 +36,6 @@ function integrate(x)
     return cumsum(x)
 end
 
-function fluctuation_function(x,y, box_start::Int, box_stop::Int, nb_pts::Int; fit_type = "polynomial")
-    if mod(box_start,10) !=0 || mod(box_stop,10) !=0
-        print("ERROR : sizes of windows must be multiple of 10")     
-    end
-    ff = Float64[]
-    ffi = Float64[]
-    @inbounds for i in log_space(box_start,box_stop,nb_pts)
-        ffi = 0
-        xi = partitioning(integrate(x),i)
-        yi = partitioning(integrate(y),i)
-        n = length(@view xi[:,1])
-        @inbounds for j in 1:n
-            ffi += ((1/i)*detrending(xi[j,:]; reg_type = fit_type)'detrending(yi[j,:]; reg_type = fit_type))
-        end
-        append!(ff,1/n*sqrt(abs(ffi)))
-    end
-    return ff
-end
-
 function dcca(x,y, box_start::Int, box_stop::Int, nb_pts::Int; fit_type = "polynomial")
     if mod(box_start,10)  !=0 || mod(box_stop,10) != 0
         print("ERROR : sizes of windows must be multiple of 10")     
