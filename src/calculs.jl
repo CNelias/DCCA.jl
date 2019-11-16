@@ -1,27 +1,19 @@
 using Polynomials
 export dcca, log_space
 
+#returns a linear range in log-log scale.
 function log_space(start::Int,stop::Int,num::Int)
-    tmp = map(x -> round(Int,x), exp10.(range(log10(start), stop=log10(stop), length=num)))
-    spacing = Int[]
-    push!(spacing,tmp[1])
-    deleteat!(tmp,1)
-    for i in tmp
-        if i != spacing[end]
-            append!(spacing,i)
-        elseif i == spacing[end]
-            append!(spacing,i+1)
-        end
-    end
-    return spacing
+    spacing = map(x -> round(Int,x), exp10.(range(log10(start), stop=log10(stop), length=num)))
+    return sort(unique(spacing))
 end
-    
-function partitioning(x,box_size) 
+
+#chops up the data according to `window`, with step `step`.
+function partitioning(x,box_size::Int64, step::Int64)
     data = copy(x)
     partitionned_data = Vector{Vector{Float64}}()
-    @inbounds for i in 1:(length(x)-(box_size-1))
+    for i in 1:step:(length(x)-(box_size-1))
         tmp = Vector{Float64}()
-        @inbounds for j in 0:(box_size-1)
+        for j in 0:(box_size-1)
             append!(tmp,data[i+j])
         end
         push!(partitionned_data,tmp)
@@ -32,11 +24,11 @@ end
 function detrending(values; reg_type = "linear", order = 1)
     position = collect(1:length(values))
     if reg_type == "polynomial"
-    fit = polyfit(position,values,order)
-    return values -  polyval(fit,position)
+        fit = polyfit(position,values,order)
+        return values -  polyval(fit,position)
     elseif reg_type == "linear"
-    curve = linreg(position,values)
-    return values - (position*curve[2] + curve[1])
+        curve = linreg(position,values)
+        return values - (position*curve[2] + curve[1])
     end
 end
 
