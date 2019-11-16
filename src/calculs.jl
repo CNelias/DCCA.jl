@@ -8,7 +8,7 @@ function log_space(start::Int,stop::Int,num::Int)
 end
 
 #chops up the data according to `window`, with step `step`.
-function partitioning(x,box_size::Int64, step::Int64)
+function partitioning(x,box_size::Int64; step = 10)
     data = copy(x)
     partitionned_data = Vector{Vector{Float64}}()
     for i in 1:step:(length(x)-(box_size-1))
@@ -36,7 +36,7 @@ function integrate(x)
     return cumsum(x)
 end
 
-function dcca(x,y, box_start::Int, box_stop::Int, nb_pts::Int; fit_type = "polynomial")
+function dcca(x,y, box_start::Int, box_stop::Int, nb_pts::Int; fit_type = "polynomial", step = 10)
     if mod(box_start,10)  !=0 || mod(box_stop,10) != 0
         print("ERROR : sizes of windows must be multiple of 10")     
     end
