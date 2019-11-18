@@ -67,7 +67,7 @@ end
 
 Performs the DCCA analysis of `x` and `y`. The default analysis starts with a window size of 3 up to one tenth of the total length of `x` for statistical reasons.
 
-returns the different window sizes used for the analysis, and the associated dcca coefficients.
+returns dcca coefficients.
 """
 function dcca(x::Array{Float64,1},y::Array{Float64,1}; box_start = 3, box_stop = div(length(x),10), nb_pts = 30)
     if box_start < 3
