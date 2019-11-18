@@ -9,7 +9,7 @@ Performs the DCCA analysis of `x` and `y`. The default analysis starts with a wi
 
 returns the different window sizes used for the analysis, and the associated dcca coefficients.
 """
-function rhoDCCA(data1::Array{Float64,1},data2::Array{Float64,1}; box_s = 3, box_e = div(length(x),10), nb_pts = 30)
+function rhoDCCA(data1::Array{Float64,1},data2::Array{Float64,1}; box_start = 3, box_stop = div(length(x),10), nb_pts = 30)
     x = log_space(box_start,box_stop,nb_pts)
     y = dcca(data1,data2; box_start = box_start, box_stop = box_stop, nb_pts = nb_pts)
     return x,y
