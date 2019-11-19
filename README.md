@@ -5,8 +5,8 @@
 Detrended Cross-Correlation Analysis
 =================================================
 
-A module to perform DCCA coefficients analysis. The coefficient rho symbolizes the strengh of the correlation between the 2 time series, it's value lies in [-1,1], a positive value indicates correlations, a negative value show anti-correlations and a value of 0 means no correlations.
-Anything in [-0.1,0.1] can in practice be considered as showing no correlations because of statistical artifacts. Indeed running the method with white noise typically gives out a curve in this range.
+A module to perform DCCA coefficients analysis. The coefficient rho symbolizes the strengh of the correlation between the 2 time series, it's value lies in [-1,1], a positive value indicates correlations, a negative value show anti-correlations and a value of 0 means no correlations.\
+Anything in [-0.1,0.1] typically can't be considered as true correlations because of statistical fluctuations. The package therefore provides a function that returns the 95% confidence interval (estimated via bootstrap) to help analyse the results.
 
 The implementation is based, among others, on this article:
 Zebende G, Da Silva M MacHado, Filho A. *DCCA cross-correlation coefficient differentiation: Theoretical and practical approaches* Physica A: Statistical Mechanics and its Applications
@@ -23,7 +23,7 @@ Pkg.clone("https://github.com/johncwok/DCCA.jl.git")
 
 Call the rhoDCCA function rhoDCCA(data1,data1,box_b::Int,box_s::Int,nb_pt::Int).
 
-the arguments have the following meaning :
+Input :
 * data1, data2 : the first  and second time series of data to analyse
 ```diff
 - The input data have to be a 1D array.
@@ -33,9 +33,20 @@ the total length of the time-series, otherwise you'll get artefacts. Stopping at
 is a good idea.
 * nb_pt : the number of points you want to perform the analysis onto. 
 
-the function returns :
+Returns :
 * the list of points where the analysis was carried out
 * the value of the DCCA coefficient at each of these points
+
+### Get the 95% confidence interval
+
+Call the rhoDCCA_CI function rhoDCCA_CI(x,y)
+
+Input:
+* x, y : The two time series to analyse.
+
+Returns:
+* lower_bound : the lower bound of the confidence interval
+* upper_bound : the upper bound of the confidence interval
 
 
 ### Example of DCCA coefficient calculation :
@@ -44,27 +55,19 @@ calling the DCCA function with random white noise
 
 ```julia
 julia> x1 = rand(1000); x2 = rand(1000)
-x,y = rhoDCCA(x,x,20,200,30)
+x,y = rhoDCCA(x1,x2)
+l,u = rhoDCCA_CI(x1,x2)
 ```
 Gave the following plot :
 
 ```julia
-plot(x,y,"bo-",markersize = 4, label = "strengh of correlation")
-title("DCCA coefficients analysis of data")
-legend()
-xlabel("Window size s")
-xscale("log")
-ylabel(L"$\rho_{DCCA}(s)$")
+a = plot(x,y)
+plot!(a,ones(x[end]*l,label = "lower bound of CI")  
+plot!(a,ones(x[end]*u,label = "upper bound of CI")  
 ```
+<img src="https://user-images.githubusercontent.com/34754896/69163454-82224680-0aee-11ea-8437-3b56cb0770b8.JPG" width="600">
+As noted previously, the value here lies in [-0.1,0.1] although we took here 2 series of white uncorrelated noise.
 
-![index](https://user-images.githubusercontent.com/34754896/42820668-f9ff05ca-89d6-11e8-9208-73d33aa3c137.png)
-
-As noted previously, the value here lies in [-0.1,0.1] although we took here 2 series of white uncorrelated noise. It is therefore important to ask yourself if your result is statistacally relevant. Here is a visual representation to show what I mean.
-
-The confidence interval was estimated by simulation and is therefore not an analytical result : even if you find a value of 0.3, you should do the experiment again to be sure that you actually found correlation and not statistical fluctuations. 
-
-
-<img src="https://user-images.githubusercontent.com/34754896/59430685-3783fc00-8de3-11e9-9390-b688df35e5fe.PNG" width="600" height="400">
 
 Requirements
 ------------
@@ -74,5 +77,6 @@ Requirements
 
 TO DO :
 ------------
-- Tidy up the code, optimize it and rename the variables.
+- Further optimize the compilation.
+- Better figure for the readme file
 
