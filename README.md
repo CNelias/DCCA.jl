@@ -72,7 +72,7 @@ As noted previously, the value here lies in [-0.1,0.1] although we took here 2 s
 Requirements
 ------------
 
-* Polynomials
+* Polynomials, StatsBase, Random
 
 
 TO DO :
