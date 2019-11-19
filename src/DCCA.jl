@@ -15,7 +15,19 @@ function rhoDCCA(data1::Array{Float64,1},data2::Array{Float64,1}; box_start = 3,
     return x, y
 end
 
-export rhoDCCA
+function rhoDCCA_CI(x,y)
+    lower, upper = zeros(500), zeros(500)
+    for i in 1:500
+        tmp = dcca(shuffle(x), shuffle(y))
+        lower[i], upper[i] = minimum(tmp), maximum(tmp)
+    end
+    sort!(lower)
+    sort!(upper)
+    return lower[25], upper[475]
+end
+
+export rhoDCCA, rhoDCCA_CI
 
 end
+
 
