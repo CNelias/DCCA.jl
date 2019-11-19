@@ -1,5 +1,6 @@
 using Polynomials
-using StatsBase, Random
+using StatsBase
+using Random
 
 export dcca, log_space
 
