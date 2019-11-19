@@ -21,12 +21,12 @@ Pkg.clone("https://github.com/johncwok/DCCA.jl.git")
 
 ### Perform a DCCA coefficient computation :
 
-Call the rhoDCCA function rhoDCCA(data1,data1,box_b::Int,box_s::Int,nb_pt::Int).
+Call the ```rhoDCCA``` function rhoDCCA(data1,data1,box_b::Int,box_s::Int,nb_pt::Int).
 
 Input :
 * data1, data2 : the first  and second time series of data to analyse
 ```diff
-- The input data have to be a 1D array.
+- The input data have to be a 1D array of Float64.
 ```
 * box_b, box_s : the starting and ending point of the analysis. It's recommended for box_s not to be to big in comparison to 
 the total length of the time-series, otherwise you'll get artefacts. Stopping at a box_s roughly equal to 1/4 of the total length 
@@ -39,7 +39,7 @@ Returns :
 
 ### Get the 95% confidence interval
 
-Call the rhoDCCA_CI function rhoDCCA_CI(x,y)
+Call the ```rhoDCCA_CI``` function rhoDCCA_CI(x,y)
 
 Input:
 * x, y : The two time series to analyse.
