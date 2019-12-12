@@ -77,6 +77,6 @@ Requirements
 
 TO DO :
 ------------
-- Further optimize the compilation.
-- Better figure for the readme file
+- Propose a "table" version of the confidence interval to speed up computation (more approximative but extremely fast).
+- Better figure for the readme file.
 
