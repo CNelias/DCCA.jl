@@ -1,3 +1,6 @@
+ WARNING: This readme is not up to date anymore, I will update it very soon.
+ ================================================================
+ 
  **Travis**     
 :--------:
 [![Build Status](https://travis-ci.com/johncwok/DCCA.jl.svg?branch=master)](https://travis-ci.com/johncwok/DCCA.jl)
@@ -77,6 +80,4 @@ Requirements
 
 TO DO :
 ------------
-- Propose a "table" version of the confidence interval to speed up computation (more approximative but extremely fast).
 - Better figure for the readme file.
-- Add further test (inspired from "DCCA and DMCA correlations of cryptocurrency markets").
