@@ -52,7 +52,7 @@ function bootsrap_CI(x::Array{Float64,1},y::Array{Float64,1}; iterations::Int = 
     return lower[div(iterations,20)], upper[iterations-div(iterations,20)]
 end
 
-export rhoDCCA, rhoDCCA_CI
+export rhoDCCA, empirical_CI, bootstrap_CI
 
 end
 
