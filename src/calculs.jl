@@ -1,6 +1,5 @@
 using Polynomials
-using StatsBase
-using Random
+using StatsBase, Random
 
 export dcca, log_space
 
@@ -23,7 +22,7 @@ To change this, change the `overlap` parameter.
 
 returns an array of size (n,box_size), n being the total number of segments.
 """
-function partitioning(x::Array{Float64,1},box_size::Int64; overlap::Int = div(box_size,2))
+function partitioning(x::Array{Float64,1},box_size::Int64; overlap::Int = box_size - 1)
     nb_windows = div(length(x) - box_size, box_size - overlap) + 1
     partitionned_data = zeros(nb_windows, box_size)
     compteur = 1
@@ -70,8 +69,8 @@ Performs the DCCA analysis of `x` and `y`. The default analysis starts with a wi
 
 returns the dcca coefficients.
 """
-function dcca(x::Array{Float64,1},y::Array{Float64,1};
-     box_start::Int = 3, box_stop::Int = div(length(x),10), nb_pts::Int = 30)
+function dcca(data1::Array{Float64,1},data2::Array{Float64,1};
+    box_start::Int = 3, box_stop::Int = div(length(data1),10), nb_pts::Int = 30)
     if box_start < 3
         print("ERROR : size of windows must be greater than 3")
         return
@@ -80,8 +79,8 @@ function dcca(x::Array{Float64,1},y::Array{Float64,1};
     rho_DCCA = zeros(length(window_sizes))
     ffi, ff1i, ff2i = 0, 0, 0
     for (index,i) in enumerate(window_sizes)
-        xi = partitioning(integrate(x),i)
-        yi = partitioning(integrate(y),i)
+        xi = partitioning(integrate(data1),i)
+        yi = partitioning(integrate(data2),i)
         n = size(xi,1)
         m = size(xi,2)
         x = Array{Float64}(collect(1:m))
@@ -99,3 +98,4 @@ function dcca(x::Array{Float64,1},y::Array{Float64,1};
     end
     return  rho_DCCA
 end
+
