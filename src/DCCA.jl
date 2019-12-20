@@ -24,6 +24,7 @@ end
     empirical_CI(x,y) --> points, critical_values
 Extrapolates tables found in the litterature to provide a 95% confidence interval between `start` and `stop`.
 The confidence interval represents the null hypothesis "no correlations".
+Provides "ready to plot" confidence interval, by also returning the points at which the critical values are evaluted.
 """
 function empirical_CI(data_length; start = 4, stop = div(data_length,10))
     if stop > 256 #256 is the biggest window size found in litterature about confidence intervals.
@@ -35,21 +36,22 @@ function empirical_CI(data_length; start = 4, stop = div(data_length,10))
 end
 
 """
-    bootstrap_CI(x,y) --> lower, upper
-Provides absolute bounds for the null hypothesis "no correlations" using a bootstrap procedure.
+    bootstrap_CI(x,y) --> points, critical_values
+Provides absolute bounds for the null hypothesis "no correlations" using a bootstrap procedure, as well as the time scales they are associated to.
+Provides "ready to plot" confidence interval.
 """
-function bootsrap_CI(x::Array{Float64,1},y::Array{Float64,1}; iterations::Int = 500)
+function bootsrap_CI(x::Array{Float64,1},y::Array{Float64,1}; iterations::Int = 100, nb_pts = 30)
     if length(x) != length(y)
         error("the two data series must have same length.")
     end
-    lower, upper = zeros(iterations), zeros(iterations)
+    windows, rhos = rhoDCCA(shuffle(x), shuffle(y); nb_pts = nb_pts)
+    critical_values = zeros(iterations)
+    bootstrap_storage = zeros(iterations, length(windows))
     for i in 1:iterations
-        tmp = dcca(shuffle(x), shuffle(y))
-        lower[i], upper[i] = minimum(tmp), maximum(tmp)
+        bootstrap_storage[i,:] = dcca(shuffle(x), shuffle(y); nb_pts = nb_pts)
     end
-    sort!(lower)
-    sort!(upper)
-    return lower[div(iterations,20)], upper[iterations-div(iterations,20)]
+    critical_values = sort!(bootstrap_storage, dims = 1)[iterations - div(iterations,20),:]
+    return windows, critical_values
 end
 
 export rhoDCCA, empirical_CI, bootstrap_CI
