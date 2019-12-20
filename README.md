@@ -60,9 +60,15 @@ display(a)
 <img src="https://user-images.githubusercontent.com/34754896/71250144-34804000-231f-11ea-912b-d2bdbacfd22b.JPG" width="600">
 As noted previously, the value here lies in [-0.1,0.1] although we took here 2 series of white uncorrelated noise.
 
+## Installation :
+ ```julia
+julia> Using Pkg
+ Pkg.clone("https://github.com/johncwok/DCCA.jl.git")
+ ```
+  
 
 
 TO DO :
 ------------
-- add installation section in readme.
+- register package.
 - Better figure for the readme file.
