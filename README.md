@@ -32,7 +32,7 @@ Returns :
 * ```rho``` : the value of the DCCA coefficient at each of these points
 
 ### Get the 95% confidence interval
-As a rule of thumb : values on ```rho``` in [-0.1,0.1] usually aren't significant.
+As a rule of thumb : values of ```rho``` in [-0.1,0.1] usually aren't significant.
 
 The confidence intervals provided by this package correspond to the **null-hypothesis** i.e **no correlations**. If ```rho``` gets **outside** of this interval it can be considered **significant**.
 
