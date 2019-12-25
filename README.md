@@ -1,7 +1,7 @@
 Detrended Cross-Correlation Analysis
 =================================================
 
-A module to perform DCCA coefficients analysis. The coefficient describes the correlation strengh between two time series, it lies in [-1, 1], 1 being perfect correlations, and -1 perfect anticorrelations.\
+A module to perform DCCA coefficients analysis. The coefficient describes the correlation strengh between two time series depending on time scales. it lies in [-1, 1], 1 being perfect correlations, and -1 perfect anticorrelations.\
 The package provides also functions returning a 95% confidence interval for the null-hypothesis (= "no-correlations"). 
 
  **Travis**     
@@ -38,7 +38,7 @@ The confidence intervals provided by this package correspond to the **null-hypot
 
 To get a fast estimation of the confidence interval, call the ```empirical_CI``` function like : ```pts, ci = empirical_CI(dataLength)```. 
 
-For a more accurate estimation, you can call ```bootstrap_CI``` : ```pts, ci = bootstrap_CI(timeSeries1, timeSeries2; iterations = 200)```. This operation is much more demanding and can take up to several minutes. The ```iterations``` additional argument controls the numer of repetition for the bootstrap procedure, the higher the value the smoother and a cleaner the estimation will be but it will also take longer.
+For a more accurate estimation, you can call ```bootstrap_CI``` : ```pts, ci = bootstrap_CI(timeSeries1, timeSeries2; iterations = 200)```. This operation is much more demanding and can take up to several minutes. The ```iterations``` additional argument controls the number of repetitions for the bootstrap procedure, the higher the value, the smoother and cleaner the estimation will be, but it will also take longer.
 
 ### Example of simple analysis :
 
