@@ -70,5 +70,5 @@ julia> Using Pkg
 
 TO DO :
 ------------
-- register package.
+- More user-friendly design ?
 - Better figure for the readme file.
