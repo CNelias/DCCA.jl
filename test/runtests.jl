@@ -1,4 +1,5 @@
 using DCCA
+using Polynomials
 using Test
 
 #data used in Paulo Ferreira's paper "DCCA and DMCA correlations of cryptocurrency markets".
