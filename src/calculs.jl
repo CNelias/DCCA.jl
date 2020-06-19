@@ -42,8 +42,8 @@ Performs a linear detrending of `x`. You can change the order of the polynomials
 """
 function detrending1(values::Array{Float64,1}; order::Int = 1)
     position = collect(1:length(values))
-    fit = Polynomials.fit(position,values,order)
-    return values .-  polyval(fit,position)
+    f = Polynomials.fit(position,values,order)
+    return values .-  polyval(f,position)
 end
 
 function detrending(values::Array{Float64,1}; order::Int = 1)
