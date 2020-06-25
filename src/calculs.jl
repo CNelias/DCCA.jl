@@ -43,17 +43,19 @@ Performs a linear detrending of `x`. You can change the order of the polynomials
 function detrending1(values::Array{Float64,1}; order::Int = 1)
     position = collect(1:length(values))
     f = Polynomials.fit(position,values,order)
-    return values .-  polyval(f,position)
+    return values .- f.(position)# polyval(f,position)
 end
-
-function detrending(values::Array{Float64,1}; order::Int = 1)
+"""
+    Performs a simple but fast linear detrending
+"""
+function detrending(values::Array{Float64,1})
     x = collect(1:length(values))
     X = hcat(ones(length(values)),x)
     A = (X'*X)\X'*values
     return values .- (x.*A[2] .+ A[1])
 end
 
-function detrending_optimized(values::Array{Float64,1}, x::Array{Float64}, X::Array{Float64}; order::Int = 1)
+function detrending_optimized(values::Array{Float64,1}, x::Array{Float64}, X::Array{Float64})
     A = (X'*X)\X'*values
     return values .- (x.*A[2] .+ A[1])
 end
@@ -98,4 +100,3 @@ function dcca(data1::Array{Float64,1},data2::Array{Float64,1};
     end
     return  rho_DCCA
 end
-
