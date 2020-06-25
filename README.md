@@ -70,5 +70,4 @@ julia> Using Pkg
 
 TO DO :
 ------------
-- More user-friendly design ?
-- Better figure for the readme file.
+- Implement non-linear detrending
