@@ -9,7 +9,7 @@ The package provides also functions returning a 95% confidence interval for the 
 [![Build Status](https://travis-ci.com/johncwok/DCCA.jl.svg?branch=master)](https://travis-ci.com/johncwok/DCCA.jl)
 
 The implementation is based on 
-Zebende G, Da Silva M MacHado, Filho A. *DCCA cross-correlation coefficient differentiation: Theoretical and practical approaches* Physica A: Statistical Mechanics and its Applications (2013) and was tested by reproducing the results of _DCCA and DMCA correlations of cryptocurrency markets_ from Paulo Ferreira,et al.
+Zebende G, Et al. *DCCA cross-correlation coefficient differentiation: Theoretical and practical approaches* (2013), and was tested by reproducing the results of _DCCA and DMCA correlations of cryptocurrency markets_ (2020) from Paulo Ferreira, et al.
 
 ## Perform a DCCA coefficients computation:
 
