@@ -17,12 +17,7 @@ Ladislav Kristoufk and Eder Johnson de Area LeãoPereira.
 
 ## Perform a DCCA coefficients computation:
 
-Call the ```rhoDCCA``` function like :
-```Julia
-pts, rho = rhoDCCA(timeSeries1, timeSeries2)
-```
-
-The function `rhoDCCA` has the following parameters:
+To compute DCCA coefficients, call the ```rhoDCCA``` function like: ```pts, rho = rhoDCCA(timeSeries1, timeSeries2)```. It has the following parameters:
 ```Julia
 rhoDCCA(timeSeries1, timeSeries2; box_start = 3, box_stop = div(length(series1),10), nb_pts = 30)
 ``` 
@@ -32,8 +27,8 @@ rhoDCCA(timeSeries1, timeSeries2; box_start = 3, box_stop = div(length(series1),
 * ```nb_pt``` : the number of points you want to evalute the analysis onto. mostly relevant for plotting
 
 **Returns**:
-* ```pts``` : the list of points where the analysis was carried out
-* ```rho``` : the value of the DCCA coefficient at each of these points
+* ```pts``` : List of points (time-scales) where the analysis is carried out.
+* ```rho``` : Value of the DCCA coefficient at each points in ```pts```.
 
 ## Get the 95% confidence interval
 As a rule of thumb : values of ```rho``` in [-0.1,0.1] usually aren't significant.
