@@ -22,22 +22,22 @@ To compute DCCA coefficients, call the ```rhoDCCA``` function like: ```pts, rho 
 rhoDCCA(timeSeries1, timeSeries2; box_start = 3, box_stop = div(length(series1),10), nb_pts = 30)
 ``` 
 **Input arguments**:
-* ```timeSeries1, timeSeries2``` : the time series to analyse (have to be array of **Float64**), having the **same length**.
-* ```box_start = 3, box_stop``` : the starting and ending point of the analysis. defaults to 3 (the minimal possible time-scale) and 1/10th of the data length (passed this size the variance gets big).
-* ```nb_pt``` : the number of points you want to evalute the analysis onto. mostly relevant for plotting
+* **timeSeries1, timeSeries2** ([Array{Float64,1}](https://docs.julialang.org/en/v1/base/arrays/)): the time series to analyse, need to be of the **same length**.
+* **box_start, box_stop** ([Int](https://docs.julialang.org/en/v1/manual/integers-and-floating-point-numbers/)): the starting and ending point of the analysis. defaults respectively to 3 (the minimal possible time-scale) and 1/10th of the data length (passed this size the variance gets big).
+* **nb_pt** ([Int](https://docs.julialang.org/en/v1/manual/integers-and-floating-point-numbers/)): the number of points you want to evalute the analysis onto. mostly relevant for plotting
 
 **Returns**:
-* ```pts``` : List of points (time-scales) where the analysis is carried out.
-* ```rho``` : Value of the DCCA coefficient at each points in ```pts```.
+* **pts** ([Array{Int,1}](https://docs.julialang.org/en/v1/base/arrays/)): List of points (time-scales) where the analysis is carried out.
+* **rho** ([Array{Float64,1}](https://docs.julialang.org/en/v1/base/arrays/)): Value of the DCCA coefficient at each points in ```pts```.
 
 ## Get the 95% confidence interval
 As a rule of thumb : values of ```rho``` in [-0.1,0.1] usually aren't significant.
 
 The confidence intervals provided by this package correspond to the **null-hypothesis** i.e **no correlations**. If ```rho``` gets **outside** of this interval it can be considered **significant**.
 
-To get a fast estimation of the confidence interval, call the ```empirical_CI``` function like : ```pts, ci = empirical_CI(dataLength)```. 
+To get a fast estimation of the confidence interval, call the ```empirical_CI``` function like: ```pts, ci = empirical_CI(dataLength)```. 
 
-For a more accurate estimation, you can call ```bootstrap_CI``` : ```pts, ci = bootstrap_CI(timeSeries1, timeSeries2; iterations = 200)```. This operation is much more demanding and can take up to several minutes. The ```iterations``` argument controls the number of repetitions for the bootstrap procedure, the higher the value, the smoother and cleaner the estimation will be, but it will also take longer.
+For a more accurate estimation, you can call ```bootstrap_CI```: ```pts, ci = bootstrap_CI(timeSeries1, timeSeries2; iterations = 200)```. This operation is much more demanding and can take up to several minutes. The ```iterations``` argument controls the number of repetitions for the bootstrap procedure, the higher the value, the smoother and cleaner the estimation will be, but it will also take longer.
 
 ## Example of simple analysis:
 
