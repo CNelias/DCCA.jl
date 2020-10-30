@@ -18,7 +18,7 @@ Ladislav Kristoufk and Eder Johnson de Area LeãoPereira.
 ## Perform a DCCA coefficients computation:
 
 Call the ```rhoDCCA``` function like :
-```
+```Julia
 pts, rho = rhoDCCA(timeSeries1, timeSeries2)
 ```
 
