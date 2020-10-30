@@ -1,7 +1,7 @@
 Detrended Cross-Correlation Analysis
 =================================================
 
-A module to perform DCCA coefficients analysis. The coefficient ```rho``` describes the correlation strengh between two time series depending on time scales. it lies in [-1, 1], 1 being perfect correlations, and -1 perfect anticorrelations.\
+A module to perform DCCA coefficients analysis. The coefficient ```rho``` describes the correlation strengh between two time series depending on time scales. It lies in [-1, 1], 1 being perfect correlations, and -1 perfect anticorrelations.\
 The package provides also functions returning a 95% confidence interval for the null-hypothesis (= "no-correlations"). 
 
  **Travis**     
@@ -9,11 +9,7 @@ The package provides also functions returning a 95% confidence interval for the 
 [![Build Status](https://travis-ci.com/johncwok/DCCA.jl.svg?branch=master)](https://travis-ci.com/johncwok/DCCA.jl)
 
 The implementation is based on 
-Zebende G, Da Silva M MacHado, Filho A. *DCCA cross-correlation coefficient differentiation: Theoretical and practical approaches* Physica A: Statistical Mechanics and its Applications
-(2013)
-and was tested by reproducing the results of _DCCA and DMCA correlations of cryptocurrency markets_ from
-Paulo Ferreira,
-Ladislav Kristoufk and Eder Johnson de Area LeãoPereira.
+Zebende G, Da Silva M MacHado, Filho A. *DCCA cross-correlation coefficient differentiation: Theoretical and practical approaches* Physica A: Statistical Mechanics and its Applications (2013) and was tested by reproducing the results of _DCCA and DMCA correlations of cryptocurrency markets_ from Paulo Ferreira,et al.
 
 ## Perform a DCCA coefficients computation:
 
@@ -62,7 +58,7 @@ As noted previously, the value here lies in [-0.1,0.1] although we took here 2 s
 ## Installation:
  ```julia
 julia> Using Pkg
- Pkg.clone("https://github.com/johncwok/DCCA.jl.git")
+ Pkg.add("DCCA")
  ```
   
 TO DO:
