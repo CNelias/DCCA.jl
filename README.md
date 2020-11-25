@@ -18,10 +18,10 @@ To compute DCCA coefficients, call the ```rhoDCCA``` function like: ```pts, rho 
 rhoDCCA(timeSeries1, timeSeries2; box_start = 3, box_stop = div(length(series1),10), nb_pts = 30, order = 1)
 ``` 
 **Input arguments**:
-* **timeSeries1, timeSeries2** ([Array{Float64,1}](https://docs.julialang.org/en/v1/base/arrays/)): the time series to analyse, need to be of the **same length**.
-* **box_start, box_stop** ([Int](https://docs.julialang.org/en/v1/manual/integers-and-floating-point-numbers/)): the starting and ending point of the analysis. defaults respectively to 3 (the minimal possible time-scale) and 1/10th of the data length (passed this size the variance gets big).
-* **nb_pt** ([Int](https://docs.julialang.org/en/v1/manual/integers-and-floating-point-numbers/)): the number of points you want to evalute the analysis onto. mostly relevant for plotting
-* **order**  ([Int](https://docs.julialang.org/en/v1/manual/integers-and-floating-point-numbers/)): The order of the polynomial to use for detrending. If not given, defaults to 1 (linear detrending).
+* **timeSeries1, timeSeries2** ([Array{Float64,1}](https://docs.julialang.org/en/v1/base/arrays/)): Time series to analyse, need to be of the **same length**.
+* **box_start, box_stop** ([Int](https://docs.julialang.org/en/v1/manual/integers-and-floating-point-numbers/)): Start and end point of the analysis. defaults respectively to 3 (the minimal possible time-scale) and 1/10th of the data length (passed this size the variance gets large).
+* **nb_pts** ([Int](https://docs.julialang.org/en/v1/manual/integers-and-floating-point-numbers/)): Number of points to carry the analysis onto. mostly relevant for plotting.
+* **order**  ([Int](https://docs.julialang.org/en/v1/manual/integers-and-floating-point-numbers/)): Order of the polynomial to use for detrending. If not given, defaults to 1 (linear detrending).
 
 **Returns**:
 * **pts** ([Array{Int,1}](https://docs.julialang.org/en/v1/base/arrays/)): List of points (time-scales) where the analysis is carried out.
