@@ -63,4 +63,4 @@ julia> Using Pkg
  ```
  
  ## To-do:
- -implement spline detrending?
+- implement spline detrending?
