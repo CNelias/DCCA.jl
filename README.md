@@ -1,7 +1,7 @@
 Detrended Cross-Correlation Analysis
 =================================================
 
-A module to perform DCCA coefficients analysis. The coefficient ```rho``` describes the correlation strengh between two time series depending on time scales. It lies in [-1, 1], 1 being perfect correlations, and -1 perfect anticorrelations.\
+A module to perform DCCA coefficients analysis. The coefficient ```rho``` describes the **correlation strengh** between two **time-series** depending on **time scales**. It lies in [-1, 1], 1 being perfect correlations, and -1 perfect anticorrelations.\
 The package provides also functions returning a 95% confidence interval for the null-hypothesis (= "no-correlations"). 
 
  **Travis**     
