@@ -8,7 +8,7 @@ include("utils.jl")
 Performs the DCCA analysis of `x` and `y`. The default analysis starts with a window size of 3 up to one tenth of the total length of `x` for statistical reasons.
 returns the different window sizes used for the analysis, and the associated dcca coefficients.
 """
-function rhoDCCA(data1::Array{Float64,1},data2::Array{Float64,1}; box_start = 3, box_stop = div(length(data1),10), nb_pts = 30)
+function rhoDCCA(data1::Array{Float64,1},data2::Array{Float64,1}; box_start = 3, box_stop = div(length(data1),10), nb_pts = 30, order = 1)
     if length(data1) != length(data2)
         error("the two data series must have same length.")
     end
@@ -16,7 +16,7 @@ function rhoDCCA(data1::Array{Float64,1},data2::Array{Float64,1}; box_start = 3,
         @warn "`Box_stop` parameter greater that 1/10 of data length. Results at large time scales might not make sense."
     end
     x = log_space(box_start,box_stop,nb_pts)
-    y = dcca(data1,data2; box_start = box_start, box_stop = box_stop, nb_pts = nb_pts)
+    y = dcca(data1,data2; box_start = box_start, box_stop = box_stop, nb_pts = nb_pts, order = order)
     return x, y
 end
 
@@ -57,5 +57,3 @@ end
 export rhoDCCA, empirical_CI, bootstrap_CI
 
 end
-
-
