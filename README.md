@@ -15,12 +15,13 @@ Zebende G, Et al. *DCCA cross-correlation coefficient differentiation: Theoretic
 
 To compute DCCA coefficients, call the ```rhoDCCA``` function like: ```pts, rho = rhoDCCA(timeSeries1, timeSeries2)```. It has the following parameters:
 ```Julia
-rhoDCCA(timeSeries1, timeSeries2; box_start = 3, box_stop = div(length(series1),10), nb_pts = 30)
+rhoDCCA(timeSeries1, timeSeries2; box_start = 3, box_stop = div(length(series1),10), nb_pts = 30, order = 1)
 ``` 
 **Input arguments**:
 * **timeSeries1, timeSeries2** ([Array{Float64,1}](https://docs.julialang.org/en/v1/base/arrays/)): the time series to analyse, need to be of the **same length**.
 * **box_start, box_stop** ([Int](https://docs.julialang.org/en/v1/manual/integers-and-floating-point-numbers/)): the starting and ending point of the analysis. defaults respectively to 3 (the minimal possible time-scale) and 1/10th of the data length (passed this size the variance gets big).
 * **nb_pt** ([Int](https://docs.julialang.org/en/v1/manual/integers-and-floating-point-numbers/)): the number of points you want to evalute the analysis onto. mostly relevant for plotting
+* **order**  ([Int](https://docs.julialang.org/en/v1/manual/integers-and-floating-point-numbers/)): The order of the polynomial to use for detrending. If not given, defaults to 1 (linear detrending).
 
 **Returns**:
 * **pts** ([Array{Int,1}](https://docs.julialang.org/en/v1/base/arrays/)): List of points (time-scales) where the analysis is carried out.
