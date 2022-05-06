@@ -34,16 +34,17 @@ The confidence intervals provided by this package correspond to the **null-hypot
 
 To get a fast estimation of the confidence interval, call the ```empirical_CI``` function like: ```pts, ci = empirical_CI(dataLength)```. 
 
-For a more accurate estimation, you can call ```bootstrap_CI```: ```pts, ci = bootstrap_CI(timeSeries1, timeSeries2; iterations = 200)```. This operation is much more demanding and can take up to several minutes. The ```iterations``` argument controls the number of repetitions for the bootstrap procedure, the higher the value, the smoother and cleaner the estimation will be, but it will also take longer.
+For a more accurate estimation, you can call ```bootstrap_CI```: ```pts, ci = bootstrap_CI(timeSeries1, timeSeries2; iterations = 200)```. This operation can be much more demanding (a few minutes). The ```iterations``` argument controls the number of repetitions for the bootstrap procedure, the higher the value, the smoother and cleaner the estimation will be, but it will also take longer.
 
 ## Example of simple analysis:
 
-calling the DCCA function with random white noise
+Calling the DCCA function with random white noise
 
 ```julia
-julia> x1 = rand(2000); x2 = rand(2000)
-x,y = rhoDCCA(x1,x2)
-pts, ci = empirical_CI(length(x1))
+julia> ts1 = rand(2000)
+ts2 = rand(2000)
+x, y = rhoDCCA(ts1, ts2)
+pts, ci = empirical_CI(length(ts1))
 ```
 Gave the following plot :
 
